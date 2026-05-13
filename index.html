@@ -706,20 +706,6 @@
         </label>
       </div>
 
-      <div class="settings-item">
-        <div class="settings-info">
-          <strong>
-            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-            <span id="txtShowAll" style="font-size: 1rem; color: #fff;">Show All Items</span>
-          </strong>
-          <span id="txtShowAllDesc">Display Normal icons too</span>
-        </div>
-        <label class="toggle-switch">
-          <input type="checkbox" id="showAllToggle">
-          <span class="toggle-slider"></span>
-        </label>
-      </div>
-
       <div class="settings-socials">
         <h3 class="socials-title" id="txtSettingsFollow">Follow King of Games</h3>
         <div class="social-icons">
@@ -798,7 +784,7 @@
         dlIcons: "Download Page icons", dlSelIcons: "Download Selected icons", dlTitle: "Download options",
         dlOpt1: "Download icons", dlOpt2: "Download icons with rarity backgrounds",
         shareItemText: "Check out this item:", shareSearchText: "Check out this Items Collection:",
-        showAllItems: "Show All Items", showAllDesc: "Display Normal icons too", wishlistManager: "Wishlist Manager",
+        wishlistManager: "Wishlist Manager",
         rarities: {
           "ARTIFACT": "ARTIFACT 🟥", "MYTHIC++": "MYTHIC++ 🟡", "MYTHIC": "MYTHIC 🟨", "EPIC++": "EPIC++ 🟣",
           "EPIC": "EPIC 🟪", "RARE": "RARE 🟦", "UNCOMMON": "UNCOMMON 🟩", "COMMON": "COMMON ⬜"
@@ -821,7 +807,7 @@
         dlIcons: "تحميل أيقونات الصفحة", dlSelIcons: "تحميل الأيقونات المحددة", dlTitle: "خيارات التحميل",
         dlOpt1: "تحميل الأيقونات", dlOpt2: "تحميل الأيقونات مع خلفيات الندرة",
         shareItemText: "اطلع على هذا العنصر:", shareSearchText: "اطلع على هذه المجموعة من العناصر:",
-        showAllItems: "إظهار كافة العناصر", showAllDesc: "عرض الأيقونات العادية أيضاً", wishlistManager: "مدير قائمة الأمنيات",
+        wishlistManager: "مدير قائمة الأمنيات",
         rarities: {
           "ARTIFACT": "خرافي 🟥", "MYTHIC++": "أسطوري ++ 🟡", "MYTHIC": "أسطوري 🟨", "EPIC++": "ملحمي ++ 🟣",
           "EPIC": "ملحمي 🟪", "RARE": "نادر 🟦", "UNCOMMON": "غير شائع 🟩", "COMMON": "عادي ⬜"
@@ -845,8 +831,7 @@
     }
     document.body.setAttribute('dir', currentLang === 'en' ? 'ltr' : 'rtl');
 
-    const isLocal = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost' || window.location.protocol === 'file:';
-    const imgBase = isLocal ? 'https://raw.githubusercontent.com/KingofGames02/Free-Fire-Items-Library/main/' : './';
+    const imgBase = './';
 
     let rawItemsData = [], itemsData = [], filteredItems = [], selectedItems = new Set();
     const validRarities = ["ARTIFACT", "MYTHIC++", "MYTHIC", "EPIC++", "EPIC", "RARE", "UNCOMMON", "COMMON"];
@@ -858,48 +843,9 @@
       ["Characters", "Pets", "Spark Pet Vault"],
       ["Bundle Create", "Choice Crates", "Loot Crates", "Weapon Crates", "Exchange Tokens", "Vouchers"]
     ];
-    
-    const defaultBg = imgBase + "RareBG_Quality/UNKNOWN.png";
-
-        // Dictionary for Default Icons mapped by Icon id
-    const defaultIconsMap = {
-      "Icon_Primecake": "Icon_Primecake.png",
-      "Icon_IAPBundle_common": "Icon_IAPBundle_common.png",
-      "FF_UI_CupMatchBox_02": "FF_UI_CupMatchBox_02.png",
-      "Icon_box_weaponskin_Random": "Icon_box_weaponskin_Random.png",
-      "Icon_HyperBook_Firedragon": "Icon_HyperBook_Firedragon.png",
-      "UI_Character_icon_AddSkill": "UI_Character_icon_AddSkill.png",
-      "UI_Icon_Privilege_Effect": "UI_Icon_Privilege_Effect.png",
-      "FF_Icon_Title_CommonIcon": "FF_Icon_Title_CommonIcon.png",
-      "FF_UI_CupMatchBox_03": "FF_UI_CupMatchBox_03.png",
-      "FF_UI_CupMatchBox_04": "FF_UI_CupMatchBox_04.png",
-      "FF_Icon_Blueprint_Base": "FF_Icon_Blueprint_Base.png",
-      "Icon_HyperBook_Rampage": "Icon_HyperBook_Rampage.png",
-      "FF_UI_Voiceitem_KOUKI43": "FF_UI_Voiceitem_KOUKI43.png",
-      "FF_UI_DoubleWheel_Box": "FF_UI_DoubleWheel_Box.png",
-      "Icon_exchange_ob27_basics_token": "Icon_exchange_ob27_basics_token.png",
-      "Icon_box_highlevel_red": "Icon_box_highlevel_red.png",
-      "Icon_box_special": "Icon_box_special.png",
-      "Icon_subscribe_package": "Icon_subscribe_package.png",
-      "Icon_EAP_Bundle_package": "Icon_EAP_Bundle_package.png",
-      "Icon_HyperBook_Inkpainting": "Icon_HyperBook_Inkpainting.png",
-      "FF_Lottery_spin_shards_ramadan_2025": "FF_Lottery_spin_shards_ramadan_2025.png",
-      "Icon_box_3": "Icon_box_3.png",
-      "Icon_HyperBook_Free": "Icon_HyperBook_Free.png",
-      "Icon_HyperBook_Theboy": "Icon_HyperBook_Theboy.png",
-      "Icon_FF_CupMatch_cscup": "Icon_FF_CupMatch_cscup.png",
-      "Icon_HyperBook_Cityhero": "Icon_HyperBook_Cityhero.png",
-      "Icon_HyperBook_Growth": "Icon_HyperBook_Growth.png",
-      "Icon_HyperBook_Persona": "Icon_HyperBook_Persona.png",
-      "FF_UI_CupMatchBox_01": "FF_UI_CupMatchBox_01.png",
-      "FF_Lottery_UniversalRing_Token": "FF_Lottery_UniversalRing_Token.png",
-      "Icon_OptionalBundle_default": "Icon_OptionalBundle_default.png",
-      "Icon_voucher": "Icon_voucher.png"
-    };
 
     let currentItem = null, currentPage = 1, itemsPerPage = 80;
     let isDevMode = false;
-    let showAllIcons = false;
 
     const searchInput = document.getElementById('searchInput');
     const searchShareBtn = document.getElementById('searchShareBtn');
@@ -914,7 +860,6 @@
     const mainLoader = document.getElementById('mainLoader');
     const devActionBar = document.getElementById('devActionBar');
     const devModeToggle = document.getElementById('devModeToggle');
-    const showAllToggle = document.getElementById('showAllToggle');
 
     const copyIconSVG = `<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>`;
     const checkIconSVG = `<svg width="18" height="18" fill="none" stroke="#10b981" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>`;
@@ -969,23 +914,6 @@
       renderPage(currentPage);
     });
 
-    showAllToggle.addEventListener('change', (e) => {
-      showAllIcons = e.target.checked;
-      const currSearch = searchInput.value;
-      const currTag = tagFilter.value;
-      const currType = typeFilter.value;
-      const currRare = rarityFilter.value;
-      
-      filterRawItems();
-      setupFilters();
-      
-      if (Array.from(tagFilter.options).some(o => o.value === currTag)) tagFilter.value = currTag;
-      if (Array.from(typeFilter.options).some(o => o.value === currType)) typeFilter.value = currType;
-      if (Array.from(rarityFilter.options).some(o => o.value === currRare)) rarityFilter.value = currRare;
-      
-      applyFilters(1);
-    });
-
     document.getElementById('settingsToggle').addEventListener('click', () => {
       document.getElementById('settingsModal').style.display = 'flex';
     });
@@ -1008,8 +936,6 @@
       document.getElementById('txtSettingsTitle').textContent = text.settings;
       document.getElementById('txtDevMode').textContent = text.devMode;
       document.getElementById('txtDevDesc').textContent = text.devDesc;
-      document.getElementById('txtShowAll').textContent = text.showAllItems;
-      document.getElementById('txtShowAllDesc').textContent = text.showAllDesc;
       document.getElementById('txtDlTitle').textContent = text.dlTitle;
       document.getElementById('txtDlOpt1').textContent = text.dlOpt1;
       document.getElementById('txtDlOpt2').textContent = text.dlOpt2;
@@ -1026,15 +952,9 @@
       document.getElementById('txtDevDl').textContent = `${isSel ? text.dlSelIcons : text.dlIcons} (${count})`;
     }
 
-            function filterRawItems() {
+    function filterRawItems() {
       itemsData = rawItemsData.filter(item => {
-        if (item.hideInIndex === true) return false;
-        
-        if (showAllIcons) {
-          return item.icon && item.icon.trim() !== "";
-        } else {
-          return item.IconInAB === "IconInCDN" && item.icon && item.icon.trim() !== "";
-        }
+        return item.hideInIndex !== true;
       });
     }
 
@@ -1127,15 +1047,25 @@
 
     function getRarityBg(rare) {
       if (rare === "NONE") return imgBase + "RareBG_Quality/COMMON.png";
+      const defaultBg = imgBase + "RareBG_Quality/UNKNOWN.png";
       if (!rare || !validRarities.includes(rare)) return defaultBg;
       return imgBase + `RareBG_Quality/${rare}.png`;
     }
 
-        function getIconUrl(item) {
-      if (item.IconInAB === "Normal" && item.icon && defaultIconsMap[item.icon]) {
-        return imgBase + 'RareBG_Quality/Default_icons/' + defaultIconsMap[item.icon];
+    async function getWorkingIconUrl(item) {
+      const url1 = `https://kog-ff-icons.vercel.app/api/icon/${item.itemID}?no_fallback=true`;
+      try {
+        const r1 = await fetch(url1, { method: 'HEAD' });
+        if (r1.ok) return url1;
+      } catch(e) {}
+      if (item.icon) {
+        const url2 = `https://kog-ff-icons.vercel.app/api/icon/${item.icon}?no_fallback=true`;
+        try {
+          const r2 = await fetch(url2, { method: 'HEAD' });
+          if (r2.ok) return url2;
+        } catch(e) {}
       }
-      return imgBase + `icons/${item.itemID}.png`;
+      return imgBase + 'RareBG_Quality/UNKNOWN.png';
     }
 
     function handleCardClick(globalIndex, cardEl) {
@@ -1169,12 +1099,22 @@
         this.style.opacity = '1';
       };
 
+      const fallbackUrl = imgBase + 'RareBG_Quality/UNKNOWN.png';
+      const url2 = currentItem.icon ? `https://kog-ff-icons.vercel.app/api/icon/${currentItem.icon}?no_fallback=true` : '';
+
       modalIconEl.onerror = function() {
-        this.onerror = null;
-        this.src = imgBase + 'RareBG_Quality/UNKNOWN.png';
+        if (this.dataset.triedIcon === 'true' || !url2) {
+          this.onerror = null;
+          this.src = fallbackUrl;
+          this.classList.remove('weapon-tilt');
+        } else {
+          this.dataset.triedIcon = 'true';
+          this.src = url2;
+        }
       };
       
-      modalIconEl.src = getIconUrl(currentItem);
+      modalIconEl.dataset.triedIcon = 'false';
+      modalIconEl.src = `https://kog-ff-icons.vercel.app/api/icon/${currentItem.itemID}?no_fallback=true`;
       
       const nameStr = currentItem.name || (currentItem.icon || "Unknown");
       const modalNameEl = document.getElementById('modalName');
@@ -1279,16 +1219,24 @@
       let htmlContent = '';
       paginatedItems.forEach((item, index) => {
         const bgData = getRarityBg(item.Rare);
-        const iconPath = getIconUrl(item);
         const delay = (index % 20) * 0.03;
         const globalIndex = itemsData.indexOf(item);
         const selClass = isDevMode && selectedItems.has(globalIndex) ? 'selected' : '';
+
+        const url1 = `https://kog-ff-icons.vercel.app/api/icon/${item.itemID}?no_fallback=true`;
+        const url2 = item.icon ? `https://kog-ff-icons.vercel.app/api/icon/${item.icon}?no_fallback=true` : '';
+        const fallbackUrl = imgBase + 'RareBG_Quality/UNKNOWN.png';
+
+        let errHandler = `this.onerror=null; this.src='${fallbackUrl}'; this.classList.remove('weapon-tilt');`;
+        if (url2) {
+          errHandler = `this.onerror=function(){ this.onerror=null; this.src='${fallbackUrl}'; this.classList.remove('weapon-tilt'); }; this.src='${url2}';`;
+        }
         
         htmlContent += `
           <div class="card ${selClass}" style="background-image: url('${bgData}'); animation-delay: ${delay}s;" onclick="handleCardClick(${globalIndex}, this)">
-            <img src="${iconPath}" class="card-icon" loading="lazy" alt="icon" 
+            <img src="${url1}" class="card-icon" loading="lazy" alt="icon" 
                  onload="if(this.naturalWidth === 300 && this.naturalHeight === 90) { this.classList.add('weapon-tilt'); }"
-                 onerror="this.onerror=null; this.src='${imgBase}RareBG_Quality/UNKNOWN.png'; this.classList.remove('weapon-tilt');">
+                 onerror="${errHandler}">
           </div>
         `;
       });
@@ -1440,7 +1388,7 @@
 
     function downloadIcon(item) {
       return new Promise(async resolve => {
-        const iconUrl = getIconUrl(item);
+        const iconUrl = await getWorkingIconUrl(item);
         try {
           const response = await fetch(iconUrl);
           const blob = await response.blob();
@@ -1466,7 +1414,7 @@
     }
 
     function downloadIconBg(item) {
-      return new Promise(resolve => {
+      return new Promise(async resolve => {
         const canvas = document.createElement('canvas');
         canvas.width = 512; canvas.height = 512;
         const ctx = canvas.getContext('2d');
@@ -1474,11 +1422,13 @@
         bgImg.crossOrigin = "Anonymous";
         bgImg.src = getRarityBg(item.Rare);
         
+        const iconUrl = await getWorkingIconUrl(item);
+
         bgImg.onload = () => {
           ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
           const iconImg = new Image();
           iconImg.crossOrigin = "Anonymous";
-          iconImg.src = getIconUrl(item);
+          iconImg.src = iconUrl;
           
           iconImg.onload = () => {
             let drawWidth = iconImg.width;
@@ -1503,7 +1453,6 @@
               a.click();
               a.remove();
             } catch (e) {
-              console.error("Canvas export failed (likely CORS):", e);
             }
             setTimeout(resolve, 200);
           };
