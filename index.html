@@ -1056,28 +1056,6 @@
       return imgBase + `RareBG_Quality/${rare}.png`;
     }
 
-    function getWorkingIconUrl(item) {
-      return new Promise(resolve => {
-        const primaryName = customIconMap[item.itemID] || item.itemID;
-        const url1 = imgBase + `ff-icons/${primaryName}.png`;
-        const url2 = item.icon ? imgBase + `ff-icons/${item.icon}.png` : '';
-        const fallback = imgBase + 'RareBG_Quality/UNKNOWN.png';
-
-        const img1 = new Image();
-        img1.crossOrigin = "Anonymous";
-        img1.onload = () => resolve(url1);
-        img1.onerror = () => {
-          if (!url2) return resolve(fallback);
-          const img2 = new Image();
-          img2.crossOrigin = "Anonymous";
-          img2.onload = () => resolve(url2);
-          img2.onerror = () => resolve(fallback);
-          img2.src = url2;
-        };
-        img1.src = url1;
-      });
-    }
-
     function handleCardClick(globalIndex, cardEl) {
       if (isDevMode) {
         if (selectedItems.has(globalIndex)) {
@@ -1400,36 +1378,52 @@
     }
 
     function downloadIcon(item) {
-      return new Promise(async resolve => {
-        const iconUrl = await getWorkingIconUrl(item);
-        try {
-          const response = await fetch(iconUrl, { method: 'GET', mode: 'cors' });
-          if (!response.ok) throw new Error("HTTP error");
-          const blob = await response.blob();
-          const url = window.URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.style.display = 'none';
-          a.href = url;
-          a.download = `${item.itemID}_icon.png`;
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
-          window.URL.revokeObjectURL(url);
-        } catch (e) {
-          const a = document.createElement('a');
-          a.href = iconUrl;
-          a.download = `${item.itemID}_icon.png`;
-          a.target = '_blank';
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
-        }
-        setTimeout(resolve, 200);
+      return new Promise(resolve => {
+        const primaryName = customIconMap[item.itemID] || item.itemID;
+        const url1 = imgBase + `ff-icons/${primaryName}.png`;
+        const url2 = item.icon ? imgBase + `ff-icons/${item.icon}.png` : '';
+
+        const executeDownload = async (finalUrl) => {
+          try {
+            const response = await fetch(finalUrl, { method: 'GET', mode: 'cors' });
+            if (!response.ok) throw new Error("HTTP error");
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = `${item.itemID}_icon.png`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            window.URL.revokeObjectURL(url);
+          } catch (e) {
+            const a = document.createElement('a');
+            a.href = finalUrl;
+            a.download = `${item.itemID}_icon.png`;
+            a.target = '_blank';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+          }
+          setTimeout(resolve, 200);
+        };
+
+        const img1 = new Image();
+        img1.onload = () => executeDownload(url1);
+        img1.onerror = () => {
+          if (!url2) return resolve();
+          const img2 = new Image();
+          img2.onload = () => executeDownload(url2);
+          img2.onerror = () => resolve();
+          img2.src = url2;
+        };
+        img1.src = url1;
       });
     }
 
     function downloadIconBg(item) {
-      return new Promise(async resolve => {
+      return new Promise(resolve => {
         const canvas = document.createElement('canvas');
         canvas.width = 512; canvas.height = 512;
         const ctx = canvas.getContext('2d');
@@ -1437,13 +1431,14 @@
         bgImg.crossOrigin = "Anonymous";
         bgImg.src = getRarityBg(item.Rare);
         
-        const iconUrl = await getWorkingIconUrl(item);
+        const primaryName = customIconMap[item.itemID] || item.itemID;
+        const url1 = imgBase + `ff-icons/${primaryName}.png`;
+        const url2 = item.icon ? imgBase + `ff-icons/${item.icon}.png` : '';
 
         bgImg.onload = () => {
           ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
           const iconImg = new Image();
           iconImg.crossOrigin = "Anonymous";
-          iconImg.src = iconUrl;
           
           iconImg.onload = () => {
             let drawWidth = iconImg.width;
@@ -1476,7 +1471,18 @@
             }
             setTimeout(resolve, 200);
           };
-          iconImg.onerror = () => resolve();
+
+          iconImg.onerror = function() {
+            if (this.dataset.triedIcon === 'true' || !url2) {
+              resolve();
+            } else {
+              this.dataset.triedIcon = 'true';
+              this.src = url2;
+            }
+          };
+          
+          iconImg.dataset.triedIcon = 'false';
+          iconImg.src = url1;
         };
         bgImg.onerror = () => resolve();
       });
