@@ -4,6 +4,7 @@ const path = require('path');
 const dataPath = path.join(__dirname, 'ItemsData_en.json');
 const iconsDir = path.join(__dirname, 'ff-icons');
 const CONCURRENCY_LIMIT = 120;
+const FORCE_UPDATE = false;
 
 const stats = {
     downloaded: 0,
@@ -41,14 +42,16 @@ async function downloadIcon(item) {
     const savePathID = path.join(iconsDir, `${itemID}.png`);
     const savePathIcon = iconName ? path.join(iconsDir, `${iconName}.png`) : null;
 
-    if (fs.existsSync(savePathID)) {
-        stats.skipped++;
-        return;
-    }
+    if (!FORCE_UPDATE) {
+        if (fs.existsSync(savePathID)) {
+            stats.skipped++;
+            return;
+        }
 
-    if (savePathIcon && fs.existsSync(savePathIcon)) {
-        stats.skipped++;
-        return;
+        if (savePathIcon && fs.existsSync(savePathIcon)) {
+            stats.skipped++;
+            return;
+        }
     }
 
     const url1 = `https://kog-ff-icons.vercel.app/api/icon/${itemID}?no_fallback=true`;
