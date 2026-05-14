@@ -302,13 +302,28 @@
       font-weight: bold;
       z-index: 20;
     }
+
+    .card.is-loading::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(110deg, transparent 20%, rgba(255, 255, 255, 0.2) 50%, transparent 80%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite linear;
+      z-index: 5;
+    }
+    
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
     
     .card-icon {
       width: 90%; 
       height: 90%; 
       object-fit: contain; 
       z-index: 2; 
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, opacity 0.4s ease;
       filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6));
     }
 
@@ -1220,6 +1235,8 @@
       const paginatedItems = filteredItems.slice(start, end);
 
       let htmlContent = '';
+      const fallbackUrl = imgBase + 'RareBG_Quality/UNKNOWN.png';
+
       paginatedItems.forEach((item, index) => {
         const bgData = getRarityBg(item.Rare);
         const delay = (index % 20) * 0.03;
@@ -1229,17 +1246,16 @@
         const primaryName = customIconMap[item.itemID] || item.itemID;
         const url1 = imgBase + `ff-icons/${primaryName}.png`;
         const url2 = item.icon ? imgBase + `ff-icons/${item.icon}.png` : '';
-        const fallbackUrl = imgBase + 'RareBG_Quality/UNKNOWN.png';
 
-        let errHandler = `this.onerror=null; this.src='${fallbackUrl}'; this.classList.remove('weapon-tilt');`;
+        let errHandler = `this.onerror=null; this.parentElement.classList.remove('is-loading'); this.style.opacity='1'; this.src='${fallbackUrl}'; this.classList.remove('weapon-tilt');`;
         if (url2) {
-          errHandler = `this.onerror=function(){ this.onerror=null; this.src='${fallbackUrl}'; this.classList.remove('weapon-tilt'); }; this.src='${url2}';`;
+          errHandler = `this.onerror=function(){ this.onerror=null; this.parentElement.classList.remove('is-loading'); this.style.opacity='1'; this.src='${fallbackUrl}'; this.classList.remove('weapon-tilt'); }; this.src='${url2}';`;
         }
         
         htmlContent += `
-          <div class="card ${selClass}" style="background-image: url('${bgData}'); animation-delay: ${delay}s;" onclick="handleCardClick(${globalIndex}, this)">
-            <img src="${url1}" class="card-icon" loading="lazy" alt="icon" crossorigin="anonymous" 
-                 onload="if(this.naturalWidth === 300 && this.naturalHeight === 90) { this.classList.add('weapon-tilt'); }"
+          <div class="card ${selClass} is-loading" style="background-image: url('${bgData}'); animation-delay: ${delay}s;" onclick="handleCardClick(${globalIndex}, this)">
+            <img src="${url1}" class="card-icon" loading="lazy" alt="icon" crossorigin="anonymous" style="opacity: 0;"
+                 onload="this.parentElement.classList.remove('is-loading'); this.style.opacity='1'; if(this.naturalWidth === 300 && this.naturalHeight === 90) { this.classList.add('weapon-tilt'); }"
                  onerror="${errHandler}">
           </div>
         `;
