@@ -1,39 +1,134 @@
-# Free Fire Items Library
+Free Fire Items Library
 
-A comprehensive web-based library to explore and browse all Free Fire game items and icons with a professional and user-friendly interface.
+A premium web-based library for exploring and browsing Free Fire items, bundles, emotes, vehicles, icons, and collectibles through a modern, fast, and user-friendly interface.
 
-## 🎯 Integration with Wishlist Manager
-Through this library, you can easily obtain **Item IDs** to use in the **[Wishlist Manager](https://kingofgames02.github.io/FFWM-app/)** tool. Searching for any item and adding it to your wishlist has become much easier and faster thanks to the integration between these tools.
+Integration with Wishlist Manager
 
-## ✨ Quick Features
-* **Multi-Language**: Full support for English and Arabic.
-* **Advanced Filtering**: Filter by Type, Rarity, and Update Tags.
-* **Developer Tools**: Easily copy IDs and download icons (bulk or single).
-* **PWA Ready**: Can be installed as a standalone app on your mobile device.
+The library is fully integrated with Wishlist Manager, allowing users to quickly find any item and retrieve its Item ID for wishlist creation and management.
+
+This makes searching, collecting, and organizing Free Fire items easier than ever.
+
+Features
+
+Extensive Item Database
+
+Browse thousands of Free Fire items including:
+
+- Bundles
+- Emotes
+- Gun Skins
+- Vehicles
+- Avatars
+- Backpacks
+- Loot Boxes
+- Collections
+- Event Rewards
+
+Advanced Search & Filters
+
+Quickly locate any item using:
+
+- Item Type Filtering
+- Rarity Filtering
+- Update Tags
+- Keyword Search
+- Multi-Category Browsing
+
+Developer Utilities
+
+Built for developers and collectors:
+
+- Copy Item IDs instantly
+- Download icons individually
+- Bulk icon downloads
+- Fast item lookup
+- Asset organization tools
+
+Multi-Language Support
+
+Fully available in:
+
+- English
+- العربية
+
+Progressive Web App (PWA)
+
+Install the library directly on your device and use it like a standalone application.
 
 ---
 
-# مكتبة عناصر فري فاير
+مكتبة عناصر فري فاير
 
-مكتبة ويب شاملة لاستعراض وتصفح كافة عناصر وأيقونات لعبة فري فاير بواجهة احترافية وسهلة الاستخدام.
+مكتبة احترافية شاملة لاستعراض جميع عناصر لعبة فري فاير وأيقوناتها بواجهة حديثة وسريعة وسهلة الاستخدام.
 
-## 🎯 التكامل مع Wishlist Manager
-من خلال هذه المكتبة، يمكنك الحصول بسهولة على **معرفات العناصر (Item IDs)** لاستخدامها في أداة **[Wishlist Manager](https://kingofgames02.github.io/FFWM-app/)**.
-لقد أصبح البحث عن أي عنصر وإضافته لقائمة أمنياتك أسهل وأسرع بكثير بفضل التكامل بين هذه الأدوات.
+التكامل مع Wishlist Manager
 
-## ✨ المميزات باختصار
-* **دعم كامل** للغتين العربية والإنجليزية.
-* **تصفية متقدمة** حسب النوع، الندرة، وتحديثات اللعبة (Tags).
-* **أدوات مطورين** لنسخ المعرفات وتحميل الأيقونات بسهولة.
-* **تطبيق ويب (PWA)** قابل للتثبيت كبرنامج مستقل على الهاتف.
+تتيح لك المكتبة الوصول السريع إلى معرفات العناصر (Item IDs) لاستخدامها مباشرة داخل Wishlist Manager، مما يجعل إدارة قوائم الأمنيات أكثر سهولة واحترافية.
+
+المميزات
+
+قاعدة بيانات ضخمة
+
+تصفح آلاف العناصر المختلفة:
+
+- الحزم (Bundles)
+- الإيموتات (Emotes)
+- سكنات الأسلحة
+- المركبات
+- الصور الرمزية
+- الحقائب
+- صناديق الجوائز
+- المقتنيات
+- مكافآت الأحداث
+
+بحث وتصفية متقدمة
+
+- البحث السريع
+- التصفية حسب النوع
+- التصفية حسب الندرة
+- التصفية حسب التحديثات
+- استعراض متعدد التصنيفات
+
+أدوات للمطورين
+
+- نسخ معرفات العناصر بضغطة واحدة
+- تحميل الأيقونات بشكل فردي
+- تحميل جماعي للأيقونات
+- الوصول السريع للبيانات
+- تنظيم الأصول البرمجية
+
+دعم اللغات
+
+- العربية
+- English
+
+تطبيق ويب PWA
+
+يمكن تثبيت المكتبة كتطبيق مستقل على الهاتف أو الكمبيوتر للوصول السريع في أي وقت.
 
 ---
 
-## 👨‍💻 Author | المطور
-Created by **King of Games**.
+Developer
 
-تم التطوير بواسطة **King of Games**.
+xMaSrY_DeV
 
-* **Instagram**: [_kingofgames02](https://www.instagram.com/_kingofgames02)
-* **Telegram**: [FF_MENA_Updates](https://t.me/FF_MENA_Updates)
-* **Linktree**: [KingofGames02](https://linktr.ee/KingofGames02)
+Contact & Community
+
+Telegram
+
+- @MC_8G
+- @YU4RO
+
+Channel
+
+- @UXD_0
+
+Website
+
+- guns.lol/3mk_eg
+
+---
+
+Built with passion for the Free Fire community.
+
+Developed and maintained by xMaSrY_DeV.
